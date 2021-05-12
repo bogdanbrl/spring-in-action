@@ -1,25 +1,40 @@
 package tacos.domain;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@Data
-@RequiredArgsConstructor
-@NoArgsConstructor(access=AccessLevel.PRIVATE, force=true)
+@Getter
+@Setter
 @Entity
+@Table(name = "ingredients")
 public class Ingredient {
 
     @Id
-    private final String id;
-    private final String name;
-    private final Type type;
+    private String id;
 
-    public static enum Type {
-        WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
+    private String name;
+
+    @Enumerated(EnumType.STRING)
+    private Type Type;
+
+    public Ingredient(String id, String name, Ingredient.Type type) {
+        this.id = id;
+        this.name = name;
+        Type = type;
+    }
+
+    public Ingredient() {
+
+    }
+
+    public enum Type {
+        WRAP,
+        PROTEIN,
+        VEGGIES,
+        CHEESE,
+        SAUCE
     }
 
 }
