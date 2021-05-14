@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import tacos.domain.Taco;
 import tacos.repository.TacoRepository;
 
+import java.util.Date;
+
 @Service
 public class TacoService {
 
@@ -14,6 +16,7 @@ public class TacoService {
     }
 
     public void add(Taco taco){
+        taco.setCreatedAt(new Date());
         tacoRepository.save(taco);
     }
 }
