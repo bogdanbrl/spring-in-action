@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import tacos.domain.Role;
 import tacos.domain.User;
 import tacos.repository.UserRepository;
 
@@ -33,7 +34,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("User " + username + " was not found in the database");
         }
 
-        List<String> roleNames = roleService.getRoleNames(user.getId());
+        List<String> roleNames = new ArrayList<>();
+        user.getRoles().forEach(r -> roleNames.add(r.getName()));
 
         List<GrantedAuthority> grantList = new ArrayList<>();
 

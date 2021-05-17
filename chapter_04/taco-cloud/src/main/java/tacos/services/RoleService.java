@@ -23,7 +23,4 @@ public class RoleService {
         return roleRepository.findByName(name);
     }
 
-    public List<String> getRoleNames(Long userId) {
-        return roleRepository.getRoleNames(userId);
-    }
 }
